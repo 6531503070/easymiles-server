@@ -1,103 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiCarCar extends Struct.CollectionTypeSchema {
-  collectionName: 'cars';
-  info: {
-    singularName: 'car';
-    pluralName: 'cars';
-    displayName: 'Car';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    model_name: Schema.Attribute.String & Schema.Attribute.Required;
-    fuel_capacity: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    seat_capacity: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<1>;
-    current_rent_cost_per_day: Schema.Attribute.Decimal &
-      Schema.Attribute.Required;
-    new_rent_cost_per_day: Schema.Attribute.Decimal;
-    steering_mode: Schema.Attribute.Enumeration<
-      ['Manual', 'Auto', 'Semi-Auto']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Manual'>;
-    model_type: Schema.Attribute.Enumeration<
-      ['UNCLASSIFIED', 'Sport', 'SUV', 'MPV', 'Sedan', 'Coupe', 'Hatchback']
-    > &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'UNCLASSIFIED'>;
-    model_year: Schema.Attribute.Integer;
-    model_image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    model_brand: Schema.Attribute.String;
-    part_image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::car.car'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiRentalContractRentalContract
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'rental_contracts';
-  info: {
-    singularName: 'rental-contract';
-    pluralName: 'rental-contracts';
-    displayName: 'Rental-Contract';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    holder: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    target_car: Schema.Attribute.Relation<'oneToOne', 'api::car.car'>;
-    pick_up: Schema.Attribute.Component<'location-mark.location-mark', false>;
-    drop_off: Schema.Attribute.Component<'location-mark.location-mark', false>;
-    payment_detail: Schema.Attribute.String;
-    status_contract: Schema.Attribute.Enumeration<
-      ['Pending', 'Success', 'Failed']
-    >;
-    status_detail: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::rental-contract.rental-contract'
-    > &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -598,6 +500,201 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
+  collectionName: 'bookings';
+  info: {
+    singularName: 'booking';
+    pluralName: 'bookings';
+    displayName: 'Booking';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    pickupLocation: Schema.Attribute.String;
+    pickupDate: Schema.Attribute.Date;
+    pickupTime: Schema.Attribute.Time;
+    dropoffLocation: Schema.Attribute.String;
+    dropoffDate: Schema.Attribute.Date;
+    dropoffTime: Schema.Attribute.Time;
+    booking_status: Schema.Attribute.String;
+    totalPrice: Schema.Attribute.Decimal;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCarCar extends Struct.CollectionTypeSchema {
+  collectionName: 'cars';
+  info: {
+    singularName: 'car';
+    pluralName: 'cars';
+    displayName: 'Car';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    type: Schema.Attribute.String;
+    brand: Schema.Attribute.String;
+    year: Schema.Attribute.Integer;
+    capacity: Schema.Attribute.Integer;
+    transmission: Schema.Attribute.String;
+    fuelType: Schema.Attribute.String;
+    pricePerDay: Schema.Attribute.Decimal;
+    car_image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    model_type: Schema.Attribute.Enumeration<
+      ['UNCLASSIFIED', 'Sport', 'SUV', 'MPV', 'Sedan', 'Coupe', 'Hatchback']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'UNCLASSIFIED'>;
+    model_year: Schema.Attribute.Integer;
+    model_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    model_brand: Schema.Attribute.String;
+    part_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::car.car'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPaymentPayment extends Struct.CollectionTypeSchema {
+  collectionName: 'payments';
+  info: {
+    singularName: 'payment';
+    pluralName: 'payments';
+    displayName: 'Payment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    method: Schema.Attribute.String;
+    payment_status: Schema.Attribute.String;
+    amount: Schema.Attribute.Decimal;
+    transactionDate: Schema.Attribute.DateTime;
+    cardNumber: Schema.Attribute.String;
+    expirationDate: Schema.Attribute.String;
+    cvc: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::payment.payment'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRentalContractRentalContract
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'rental_contracts';
+  info: {
+    singularName: 'rental-contract';
+    pluralName: 'rental-contracts';
+    displayName: 'Rental-Contract';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    holder: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    target_car: Schema.Attribute.Relation<'oneToOne', 'api::car.car'>;
+    pick_up: Schema.Attribute.Component<'location-mark.location-mark', false>;
+    drop_off: Schema.Attribute.Component<'location-mark.location-mark', false>;
+    payment_detail: Schema.Attribute.String;
+    status_contract: Schema.Attribute.Enumeration<
+      ['Pending', 'Success', 'Failed']
+    >;
+    status_detail: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::rental-contract.rental-contract'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiReviewReview extends Struct.CollectionTypeSchema {
+  collectionName: 'reviews';
+  info: {
+    singularName: 'review';
+    pluralName: 'reviews';
+    displayName: 'Review';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    comment: Schema.Attribute.Text;
+    date: Schema.Attribute.DateTime;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::review.review'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -970,8 +1067,6 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
-      'api::car.car': ApiCarCar;
-      'api::rental-contract.rental-contract': ApiRentalContractRentalContract;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -982,6 +1077,11 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::booking.booking': ApiBookingBooking;
+      'api::car.car': ApiCarCar;
+      'api::payment.payment': ApiPaymentPayment;
+      'api::rental-contract.rental-contract': ApiRentalContractRentalContract;
+      'api::review.review': ApiReviewReview;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

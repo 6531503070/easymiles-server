@@ -47,7 +47,6 @@
         "audios"
       ]
     },
-<<<<<<< HEAD
     "model_type": {
       "type": "enumeration",
       "enum": [
@@ -79,27 +78,14 @@
       "type": "string"
     },
     "part_image": {
-=======
-    "part_image": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
->>>>>>> 00029a902164367d92d260599ebb2fbb1c20d8b9
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-<<<<<<< HEAD
       ],
       "type": "media",
       "multiple": false
-=======
-      ]
-    },
-    "rent_status": {
-      "type": "string"
->>>>>>> 00029a902164367d92d260599ebb2fbb1c20d8b9
     }
   }
 }

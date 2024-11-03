@@ -4,7 +4,8 @@
   "info": {
     "singularName": "car",
     "pluralName": "cars",
-    "displayName": "Car"
+    "displayName": "Car",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,9 @@
     },
     "model_type": {
       "type": "string"
+    },
+    "fuel_capacity": {
+      "type": "decimal"
     }
   }
 }

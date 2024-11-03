@@ -6,6 +6,7 @@ export interface ApiCarCar extends Struct.CollectionTypeSchema {
     singularName: 'car';
     pluralName: 'cars';
     displayName: 'Car';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -13,6 +14,7 @@ export interface ApiCarCar extends Struct.CollectionTypeSchema {
   attributes: {
     model_name: Schema.Attribute.String;
     model_type: Schema.Attribute.String;
+    fuel_capacity: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

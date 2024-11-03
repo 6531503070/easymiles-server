@@ -57,6 +57,32 @@
       ],
       "default": "UNCLASSIFIED",
       "required": true
+    },
+    "model_year": {
+      "type": "integer"
+    },
+    "model_image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "model_brand": {
+      "type": "string"
+    },
+    "part_image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

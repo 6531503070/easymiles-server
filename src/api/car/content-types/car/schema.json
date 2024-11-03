@@ -12,38 +12,42 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "model_name": {
-      "type": "string",
-      "required": true,
-      "unique": false
+    "name": {
+      "type": "string"
     },
-    "fuel_capacity": {
-      "type": "decimal",
-      "required": true
+    "type": {
+      "type": "string"
     },
-    "seat_capacity": {
-      "type": "integer",
-      "required": true,
-      "default": 1,
-      "min": 1
+    "brand": {
+      "type": "string"
     },
-    "current_rent_cost_per_day": {
-      "type": "decimal",
-      "required": true
+    "year": {
+      "type": "integer"
     },
-    "new_rent_cost_per_day": {
+    "capacity": {
+      "type": "integer"
+    },
+    "transmission": {
+      "type": "string"
+    },
+    "fuelType": {
+      "type": "string"
+    },
+    "pricePerDay": {
       "type": "decimal"
     },
-    "steering_mode": {
-      "type": "enumeration",
-      "enum": [
-        "Manual",
-        "Auto",
-        "Semi-Auto"
-      ],
-      "required": true,
-      "default": "Manual"
+    "car_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
+<<<<<<< HEAD
     "model_type": {
       "type": "enumeration",
       "enum": [
@@ -75,14 +79,27 @@
       "type": "string"
     },
     "part_image": {
+=======
+    "part_image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+>>>>>>> 00029a902164367d92d260599ebb2fbb1c20d8b9
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
+<<<<<<< HEAD
       ],
       "type": "media",
       "multiple": false
+=======
+      ]
+    },
+    "rent_status": {
+      "type": "string"
+>>>>>>> 00029a902164367d92d260599ebb2fbb1c20d8b9
     }
   }
 }

@@ -69,6 +69,30 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::car.car"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "light",
+        "dark"
+      ],
+      "default": "light"
+    },
+    "city": {
+      "type": "string"
+    },
+    "town": {
+      "type": "string"
+    },
+    "profile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

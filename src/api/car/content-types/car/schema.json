@@ -17,10 +17,6 @@
       "required": true,
       "unique": false
     },
-    "model_type": {
-      "type": "string",
-      "required": true
-    },
     "fuel_capacity": {
       "type": "decimal",
       "required": true
@@ -38,7 +34,7 @@
     "new_rent_cost_per_day": {
       "type": "decimal"
     },
-    "pilot_mode": {
+    "steering_mode": {
       "type": "enumeration",
       "enum": [
         "Manual",
@@ -47,6 +43,20 @@
       ],
       "required": true,
       "default": "Manual"
+    },
+    "model_type": {
+      "type": "enumeration",
+      "enum": [
+        "UNCLASSIFIED",
+        "Sport",
+        "SUV",
+        "MPV",
+        "Sedan",
+        "Coupe",
+        "Hatchback"
+      ],
+      "default": "UNCLASSIFIED",
+      "required": true
     }
   }
 }

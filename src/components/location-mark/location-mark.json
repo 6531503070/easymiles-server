@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_location_mark_location_marks",
+  "info": {
+    "displayName": "Location-Mark",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "location": {
+      "type": "customField",
+      "options": {
+        "info": true
+      },
+      "customField": "plugin::geodata.geojson"
+    },
+    "datetime": {
+      "type": "datetime"
+    }
+  }
+}

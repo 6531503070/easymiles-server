@@ -13,7 +13,6 @@ export interface ApiCarCar extends Struct.CollectionTypeSchema {
   };
   attributes: {
     model_name: Schema.Attribute.String & Schema.Attribute.Required;
-    model_type: Schema.Attribute.String & Schema.Attribute.Required;
     fuel_capacity: Schema.Attribute.Decimal & Schema.Attribute.Required;
     seat_capacity: Schema.Attribute.Integer &
       Schema.Attribute.Required &
@@ -27,9 +26,16 @@ export interface ApiCarCar extends Struct.CollectionTypeSchema {
     current_rent_cost_per_day: Schema.Attribute.Decimal &
       Schema.Attribute.Required;
     new_rent_cost_per_day: Schema.Attribute.Decimal;
-    pilot_mode: Schema.Attribute.Enumeration<['Manual', 'Auto', 'Semi-Auto']> &
+    steering_mode: Schema.Attribute.Enumeration<
+      ['Manual', 'Auto', 'Semi-Auto']
+    > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Manual'>;
+    model_type: Schema.Attribute.Enumeration<
+      ['UNCLASSIFIED', 'Sport', 'SUV', 'MPV', 'Sedan', 'Coupe', 'Hatchback']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'UNCLASSIFIED'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -39,6 +45,47 @@ export interface ApiCarCar extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::car.car'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRentalContractRentalContract
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'rental_contracts';
+  info: {
+    singularName: 'rental-contract';
+    pluralName: 'rental-contracts';
+    displayName: 'Rental-Contract';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    holder: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    target_car: Schema.Attribute.Relation<'oneToOne', 'api::car.car'>;
+    pick_up: Schema.Attribute.Component<'location-mark.location-mark', false>;
+    drop_off: Schema.Attribute.Component<'location-mark.location-mark', false>;
+    payment_detail: Schema.Attribute.String;
+    status_contract: Schema.Attribute.Enumeration<
+      ['Pending', 'Success', 'Failed']
+    >;
+    status_detail: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::rental-contract.rental-contract'
+    > &
       Schema.Attribute.Private;
   };
 }
@@ -522,6 +569,11 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     favorite_cars: Schema.Attribute.Relation<'oneToMany', 'api::car.car'>;
+    theme: Schema.Attribute.Enumeration<['light', 'dark']> &
+      Schema.Attribute.DefaultTo<'light'>;
+    city: Schema.Attribute.String;
+    town: Schema.Attribute.String;
+    profile: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -911,6 +963,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
       'api::car.car': ApiCarCar;
+      'api::rental-contract.rental-contract': ApiRentalContractRentalContract;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

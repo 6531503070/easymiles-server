@@ -13,13 +13,40 @@
   "pluginOptions": {},
   "attributes": {
     "model_name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": false
     },
     "model_type": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "fuel_capacity": {
+      "type": "decimal",
+      "required": true
+    },
+    "seat_capacity": {
+      "type": "integer",
+      "required": true,
+      "default": 1,
+      "min": 1
+    },
+    "current_rent_cost_per_day": {
+      "type": "decimal",
+      "required": true
+    },
+    "new_rent_cost_per_day": {
       "type": "decimal"
+    },
+    "pilot_mode": {
+      "type": "enumeration",
+      "enum": [
+        "Manual",
+        "Auto",
+        "Semi-Auto"
+      ],
+      "required": true,
+      "default": "Manual"
     }
   }
 }

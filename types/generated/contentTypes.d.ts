@@ -12,9 +12,24 @@ export interface ApiCarCar extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    model_name: Schema.Attribute.String;
-    model_type: Schema.Attribute.String;
-    fuel_capacity: Schema.Attribute.Decimal;
+    model_name: Schema.Attribute.String & Schema.Attribute.Required;
+    model_type: Schema.Attribute.String & Schema.Attribute.Required;
+    fuel_capacity: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    seat_capacity: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    current_rent_cost_per_day: Schema.Attribute.Decimal &
+      Schema.Attribute.Required;
+    new_rent_cost_per_day: Schema.Attribute.Decimal;
+    pilot_mode: Schema.Attribute.Enumeration<['Manual', 'Auto', 'Semi-Auto']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Manual'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

@@ -12,51 +12,54 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "model_name": {
-      "type": "string",
-      "required": true,
-      "unique": false
+    "name": {
+      "type": "string"
     },
-    "fuel_capacity": {
-      "type": "decimal",
-      "required": true
+    "type": {
+      "type": "string"
     },
-    "seat_capacity": {
-      "type": "integer",
-      "required": true,
-      "default": 1,
-      "min": 1
+    "brand": {
+      "type": "string"
     },
-    "current_rent_cost_per_day": {
-      "type": "decimal",
-      "required": true
+    "year": {
+      "type": "integer"
     },
-    "new_rent_cost_per_day": {
+    "capacity": {
+      "type": "integer"
+    },
+    "transmission": {
+      "type": "string"
+    },
+    "fuelType": {
+      "type": "string"
+    },
+    "pricePerDay": {
       "type": "decimal"
     },
-    "steering_mode": {
-      "type": "enumeration",
-      "enum": [
-        "Manual",
-        "Auto",
-        "Semi-Auto"
-      ],
-      "required": true,
-      "default": "Manual"
+    "car_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
-    "model_type": {
-      "type": "enumeration",
-      "enum": [
-        "UNCLASSIFIED",
-        "Sport",
-        "SUV",
-        "MPV",
-        "Sedan",
-        "Coupe",
-        "Hatchback"
-      ],
-      "default": "UNCLASSIFIED",
-      "required": true
+    "part_image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "rent_status": {
+      "type": "string"
     }
   }
 }

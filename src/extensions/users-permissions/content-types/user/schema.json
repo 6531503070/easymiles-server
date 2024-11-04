@@ -12,30 +12,6 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "username": {
-      "type": "string",
-      "minLength": 3,
-      "unique": true,
-      "configurable": false,
-      "required": true
-    },
-    "email": {
-      "type": "email",
-      "minLength": 6,
-      "configurable": false,
-      "required": true
-    },
-    "provider": {
-      "type": "string",
-      "configurable": false
-    },
-    "password": {
-      "type": "password",
-      "minLength": 6,
-      "configurable": false,
-      "private": true,
-      "searchable": false
-    },
     "resetPasswordToken": {
       "type": "string",
       "configurable": false,
@@ -65,34 +41,81 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "favorite_cars": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::car.car"
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "required": true
     },
-    "theme": {
-      "type": "enumeration",
-      "enum": [
-        "light",
-        "dark"
-      ],
-      "default": "light"
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "required": true
     },
-    "city": {
+    "provider": {
       "type": "string"
     },
-    "town": {
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "private": true,
+      "searchable": false
+    },
+    "firstName": {
       "type": "string"
     },
-    "profile": {
+    "lastName": {
+      "type": "string"
+    },
+    "contact": {
+      "type": "string",
+      "required": true,
+      "minLength": 10,
+      "regex": "^[0-9]{10}$"
+    },
+    "address": {
+      "type": "text"
+    },
+    "profilePicture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "cars": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::car.car",
+      "mappedBy": "username"
+    },
+    "histories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::history.history",
+      "mappedBy": "users_permissions_user"
+    },
+    "fevorites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fevorite.fevorite",
+      "mappedBy": "users_permissions_user"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "users_permissions_user"
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

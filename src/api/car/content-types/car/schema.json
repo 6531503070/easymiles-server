@@ -12,18 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
-    },
-    "type": {
-      "type": "string"
-    },
-    "brand": {
-      "type": "string"
-    },
-    "year": {
-      "type": "integer"
-    },
     "capacity": {
       "type": "integer"
     },
@@ -35,17 +23,6 @@
     },
     "pricePerDay": {
       "type": "decimal"
-    },
-    "car_image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
     },
     "model_type": {
       "type": "enumeration",
@@ -65,27 +42,60 @@
       "type": "integer"
     },
     "model_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "model_brand": {
       "type": "string"
     },
     "part_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "histories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::history.history",
+      "mappedBy": "car"
+    },
+    "model": {
+      "type": "string"
+    },
+    "fevorites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fevorite.fevorite",
+      "mappedBy": "car"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "car"
+    },
+    "bookings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::booking.booking",
+      "mappedBy": "car"
+    },
+    "previouslyBookedCount": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
